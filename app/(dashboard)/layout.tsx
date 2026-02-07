@@ -1,5 +1,5 @@
 import { DashboardLayout } from "@/components/dashboard";
-import { CartProvider, OrdersProvider } from "@/contexts";
+import { CartProvider, OrdersProvider, FavouritesProvider } from "@/contexts";
 
 export default function DashboardRouteLayout({
   children,
@@ -9,7 +9,9 @@ export default function DashboardRouteLayout({
   return (
     <CartProvider>
       <OrdersProvider>
-        <DashboardLayout>{children}</DashboardLayout>
+        <FavouritesProvider>
+          <DashboardLayout>{children}</DashboardLayout>
+        </FavouritesProvider>
       </OrdersProvider>
     </CartProvider>
   );
