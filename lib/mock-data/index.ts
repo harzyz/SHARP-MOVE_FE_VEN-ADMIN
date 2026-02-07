@@ -8,3 +8,7 @@ export {
   type Restaurant,
   type RecentOrder,
 } from "./explore";
+
+export { MENU_CATEGORIES, MENU_ITEMS } from "./restaurant-menus";
+
+export { MOCK_ORDER_HISTORY } from "./orders";
