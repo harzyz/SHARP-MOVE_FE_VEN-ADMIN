@@ -566,3 +566,6 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+.debugger{
+  border: 1px solid red;
+}

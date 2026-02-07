@@ -18,7 +18,7 @@ export function DashboardLayout({ children, className }: DashboardLayoutProps) {
       <DashboardHeader />
       <div className="flex">
         <DashboardSidebar className="hidden lg:flex lg:flex-col" />
-        <main className="flex-1 pb-18 lg:pb-0">{children}</main>
+        <main className="flex-1 pb-18 overflow-y-scroll lg:pb-0">{children}</main>
       </div>
       <DashboardBottomNav className="lg:hidden" />
     </div>
