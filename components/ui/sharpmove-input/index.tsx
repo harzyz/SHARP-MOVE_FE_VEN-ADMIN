@@ -25,21 +25,21 @@ export interface SharpmoveInputProps
   className?: string;
 }
 
+const floated =
+  "peer-focus:top-0 peer-focus:px-1 peer-focus:bg-background peer-[:not(:placeholder-shown)]:top-0 peer-[:not(:placeholder-shown)]:px-1 peer-[:not(:placeholder-shown)]:bg-background";
+
 const sizeClasses = {
   sm: {
-    input: "h-9 text-sm rounded-md pt-3 pb-1.5 px-3",
-    label:
-      "text-xs peer-placeholder-shown:text-sm left-3 top-1.5 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-focus:top-1.5 peer-focus:translate-y-0",
+    input: "h-9 text-sm rounded-md px-3 py-2",
+    label: `text-sm left-2 top-1/2 -translate-y-1/2 peer-focus:text-xs ${floated} peer-[:not(:placeholder-shown)]:text-xs`,
   },
   md: {
-    input: "h-11 text-base rounded-lg pt-4 pb-2 px-3",
-    label:
-      "text-xs peer-placeholder-shown:text-base left-3 top-2.5 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-focus:top-2.5 peer-focus:translate-y-0",
+    input: "h-11 text-base rounded-lg px-3 py-2",
+    label: `text-base left-2 top-1/2 -translate-y-1/2 peer-focus:text-xs ${floated} peer-[:not(:placeholder-shown)]:text-xs`,
   },
   lg: {
-    input: "h-12 text-lg rounded-lg pt-5 pb-2.5 px-4",
-    label:
-      "text-sm peer-placeholder-shown:text-lg left-4 top-3 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-focus:top-3 peer-focus:translate-y-0",
+    input: "h-12 text-lg rounded-lg px-4 py-2",
+    label: `text-lg left-3 top-1/2 -translate-y-1/2 peer-focus:text-sm ${floated} peer-[:not(:placeholder-shown)]:text-sm`,
   },
 } as const;
 
@@ -106,7 +106,8 @@ const SharpmoveInput = forwardRef<HTMLInputElement, SharpmoveInputProps>(
             className={cn(
               "peer w-full transition-colors duration-150",
               sizeStyles.input,
-              hasError ? variantStyles.inputError : variantStyles.input,
+              variantStyles.input,
+              hasError && variantStyles.inputError,
               disabled && "cursor-not-allowed opacity-60"
             )}
             {...inputProps}
@@ -114,7 +115,7 @@ const SharpmoveInput = forwardRef<HTMLInputElement, SharpmoveInputProps>(
           <label
             htmlFor={id}
             className={cn(
-              "pointer-events-none absolute z-[1] origin-left transition-all duration-200 text-foreground-muted peer-focus:text-foreground",
+              "pointer-events-none absolute z-[1] origin-left transition-all duration-200 text-foreground-muted peer-focus:text-foreground peer-[:not(:placeholder-shown)]:text-foreground",
               sizeStyles.label,
               hasError && "text-error-600 peer-focus:text-error-600",
               disabled && "opacity-60"
