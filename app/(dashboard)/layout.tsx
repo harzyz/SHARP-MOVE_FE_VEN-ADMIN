@@ -1,5 +1,5 @@
 import { DashboardLayout } from "@/components/dashboard";
-import { CartProvider, OrdersProvider, FavouritesProvider } from "@/contexts";
+import { VendorProvider, VendorOrdersProvider, MenuProvider } from "@/contexts";
 
 export default function DashboardRouteLayout({
   children,
@@ -7,12 +7,12 @@ export default function DashboardRouteLayout({
   children: React.ReactNode;
 }) {
   return (
-    <CartProvider>
-      <OrdersProvider>
-        <FavouritesProvider>
+    <VendorProvider>
+      <VendorOrdersProvider>
+        <MenuProvider>
           <DashboardLayout>{children}</DashboardLayout>
-        </FavouritesProvider>
-      </OrdersProvider>
-    </CartProvider>
+        </MenuProvider>
+      </VendorOrdersProvider>
+    </VendorProvider>
   );
 }

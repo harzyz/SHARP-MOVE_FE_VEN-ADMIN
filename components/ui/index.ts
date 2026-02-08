@@ -6,3 +6,5 @@ export { RatingStars, type RatingStarsProps } from "./rating-stars";
 export { Modal, type ModalProps } from "./modal";
 export { QuantityStepper, type QuantityStepperProps } from "./quantity-stepper";
 export { Badge, type BadgeProps } from "./badge";
+export { ToggleSwitch, type ToggleSwitchProps } from "./toggle-switch";
+export { StatusBadge, type StatusBadgeProps } from "./status-badge";

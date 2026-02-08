@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { SharpMoveLogo } from "@/components/sharp-move-logo";
 import { SharpmoveInput, SharpmoveButton } from "@/components/ui";
 import { cn } from "@/lib/utils";
@@ -11,6 +12,7 @@ export interface LoginViewProps {
 }
 
 export function LoginView({ className }: LoginViewProps) {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -39,7 +41,10 @@ export function LoginView({ className }: LoginViewProps) {
     if (!validate()) return;
     setIsLoading(true);
     // TODO: integrate with auth API
-    setTimeout(() => setIsLoading(false), 2000);
+    setTimeout(() => {
+      setIsLoading(false);
+      router.push("/dashboard");
+    }, 1500);
   }
 
   return (
