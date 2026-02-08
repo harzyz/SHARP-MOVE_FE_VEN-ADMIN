@@ -1,5 +1,5 @@
-import { LandingPage } from "@/views/landing-page";
+import { LoginView } from "@/views/login";
 
 export default function Home() {
-  return <LandingPage />;
+  return <LoginView />;
 }
