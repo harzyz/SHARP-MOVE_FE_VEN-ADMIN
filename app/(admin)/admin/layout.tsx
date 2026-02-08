@@ -1,5 +1,13 @@
 import { AdminDashboardLayout } from "@/components/admin-dashboard";
-import { AdminAuthProvider, AdminUsersProvider, AdminOrdersProvider, AdminVendorsProvider } from "@/contexts";
+import {
+  AdminAuthProvider,
+  AdminUsersProvider,
+  AdminOrdersProvider,
+  AdminVendorsProvider,
+  AdminRidersProvider,
+  AdminSupportProvider,
+  AdminPromotionsProvider,
+} from "@/contexts";
 
 export default function AdminRouteLayout({
   children,
@@ -11,7 +19,13 @@ export default function AdminRouteLayout({
       <AdminUsersProvider>
         <AdminOrdersProvider>
           <AdminVendorsProvider>
-            <AdminDashboardLayout>{children}</AdminDashboardLayout>
+            <AdminRidersProvider>
+              <AdminSupportProvider>
+                <AdminPromotionsProvider>
+                  <AdminDashboardLayout>{children}</AdminDashboardLayout>
+                </AdminPromotionsProvider>
+              </AdminSupportProvider>
+            </AdminRidersProvider>
           </AdminVendorsProvider>
         </AdminOrdersProvider>
       </AdminUsersProvider>

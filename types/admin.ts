@@ -295,3 +295,266 @@ export interface DateRangeFilter {
   startDate: string;
   endDate: string;
 }
+
+// ============================================
+// RIDER MANAGEMENT TYPES
+// ============================================
+
+export type RiderStatus = "online" | "offline" | "on_delivery" | "suspended";
+
+export type RiderOnboardingStatus =
+  | "application_submitted"
+  | "documents_under_review"
+  | "training_pending"
+  | "approved"
+  | "rejected";
+
+export interface RiderZone {
+  id: string;
+  name: string;
+  ridersOnline: number;
+  ridersTotal: number;
+  pendingDeliveries: number;
+}
+
+export interface Rider {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  status: RiderStatus;
+  onboardingStatus: RiderOnboardingStatus;
+  zone: string;
+  vehicleType: "motorcycle" | "bicycle" | "car";
+  licensePlate?: string;
+  joinedAt: string;
+  lastActiveAt: string;
+  totalDeliveries: number;
+  totalEarnings: number;
+  currentBalance: number;
+  rating: number;
+  totalRatings: number;
+  avgDeliveryTime: number;
+  completionRate: number;
+  isAvailable: boolean;
+}
+
+export interface RiderApplication {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  vehicleType: "motorcycle" | "bicycle" | "car";
+  zone: string;
+  status: RiderOnboardingStatus;
+  submittedAt: string;
+  reviewedAt?: string;
+  reviewedBy?: string;
+  rejectionReason?: string;
+}
+
+export interface RiderPayout {
+  id: string;
+  riderId: string;
+  riderName: string;
+  amount: number;
+  deliveries: number;
+  period: string;
+  status: "pending" | "processing" | "completed" | "failed";
+  paidAt?: string;
+}
+
+// ============================================
+// FINANCE TYPES
+// ============================================
+
+export interface PlatformTransaction {
+  id: string;
+  type: "order_payment" | "vendor_payout" | "rider_payout" | "refund" | "commission" | "promo_cost";
+  description: string;
+  amount: number;
+  direction: "inflow" | "outflow";
+  entityId?: string;
+  entityName?: string;
+  timestamp: string;
+  status: "completed" | "pending" | "failed";
+}
+
+export interface RevenueSummary {
+  totalRevenue: number;
+  totalCommissions: number;
+  totalDeliveryFees: number;
+  totalServiceFees: number;
+  totalRefunds: number;
+  totalPromoCosts: number;
+  netRevenue: number;
+  period: string;
+}
+
+export interface VendorPayoutSummary {
+  id: string;
+  vendorId: string;
+  vendorName: string;
+  amount: number;
+  ordersCount: number;
+  commissionDeducted: number;
+  period: string;
+  status: "pending" | "processing" | "completed" | "failed";
+  paidAt?: string;
+}
+
+// ============================================
+// PROMOTIONS TYPES
+// ============================================
+
+export type PromoStatus = "active" | "scheduled" | "expired" | "paused";
+export type PromoType = "percentage" | "fixed_amount" | "free_delivery" | "buy_one_get_one";
+
+export interface PromoCode {
+  id: string;
+  code: string;
+  description: string;
+  type: PromoType;
+  value: number;
+  minOrderAmount: number;
+  maxDiscount?: number;
+  usageLimit: number;
+  usedCount: number;
+  status: PromoStatus;
+  startDate: string;
+  endDate: string;
+  createdBy: string;
+  applicableVendors: string[];
+}
+
+export interface Campaign {
+  id: string;
+  name: string;
+  description: string;
+  status: PromoStatus;
+  budget: number;
+  spent: number;
+  startDate: string;
+  endDate: string;
+  targetAudience: string;
+  promoCodes: string[];
+  impressions: number;
+  conversions: number;
+}
+
+// ============================================
+// ANALYTICS TYPES
+// ============================================
+
+export interface AnalyticsMetric {
+  id: string;
+  label: string;
+  value: number;
+  previousValue: number;
+  format: "currency" | "number" | "percentage" | "duration";
+  trend: "up" | "down" | "flat";
+  trendPercentage: number;
+}
+
+export interface AnalyticsChartData {
+  label: string;
+  datasets: { name: string; values: number[] }[];
+  labels: string[];
+}
+
+// ============================================
+// SUPPORT TYPES
+// ============================================
+
+export type TicketStatus = "open" | "in_progress" | "awaiting_response" | "resolved" | "closed";
+export type TicketPriority = "low" | "medium" | "high" | "urgent";
+export type TicketCategory = "order_issue" | "payment" | "account" | "vendor_complaint" | "rider_complaint" | "technical" | "other";
+
+export interface SupportTicket {
+  id: string;
+  ticketNumber: string;
+  subject: string;
+  description: string;
+  category: TicketCategory;
+  priority: TicketPriority;
+  status: TicketStatus;
+  customerName: string;
+  customerId: string;
+  customerEmail: string;
+  assignedTo?: string;
+  relatedOrderId?: string;
+  createdAt: string;
+  updatedAt: string;
+  resolvedAt?: string;
+  messages: TicketMessage[];
+}
+
+export interface TicketMessage {
+  id: string;
+  sender: string;
+  senderRole: "customer" | "admin";
+  message: string;
+  timestamp: string;
+}
+
+// ============================================
+// SYSTEM CONFIG TYPES
+// ============================================
+
+export interface FeatureFlag {
+  id: string;
+  key: string;
+  label: string;
+  description: string;
+  isEnabled: boolean;
+  updatedAt: string;
+  updatedBy: string;
+}
+
+export interface MaintenanceWindow {
+  id: string;
+  title: string;
+  description: string;
+  scheduledStart: string;
+  scheduledEnd: string;
+  status: "scheduled" | "in_progress" | "completed" | "cancelled";
+  affectedServices: string[];
+  createdBy: string;
+}
+
+export interface PlatformSetting {
+  id: string;
+  key: string;
+  label: string;
+  value: string;
+  type: "string" | "number" | "boolean" | "percentage";
+  category: "general" | "orders" | "payments" | "delivery" | "notifications";
+  description: string;
+}
+
+// ============================================
+// SECURITY / AUDIT TYPES
+// ============================================
+
+export interface AdminUserEntry {
+  id: string;
+  name: string;
+  email: string;
+  role: AdminRole;
+  isActive: boolean;
+  lastLoginAt: string;
+  createdAt: string;
+  invitedBy: string;
+}
+
+export interface AuditLogEntry {
+  id: string;
+  action: string;
+  description: string;
+  performedBy: string;
+  performedByRole: AdminRole;
+  targetType?: string;
+  targetId?: string;
+  ipAddress: string;
+  timestamp: string;
+}
