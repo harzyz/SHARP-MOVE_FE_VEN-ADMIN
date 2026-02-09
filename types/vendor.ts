@@ -184,7 +184,7 @@ export interface FAQItem {
   category: string;
 }
 
-export interface SupportTicket {
+export interface VendorSupportTicket {
   subject: string;
   category: string;
   message: string;

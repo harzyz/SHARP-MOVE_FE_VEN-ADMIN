@@ -1,5 +1,5 @@
-import { AdminStubView } from "@/views/admin/stub";
+import { AdminRidersView } from "@/views/admin/riders";
 
 export default function AdminRidersPage() {
-  return <AdminStubView title="Rider Management" description="Rider tracking, assignment, and performance management tools will appear here." />;
+  return <AdminRidersView />;
 }

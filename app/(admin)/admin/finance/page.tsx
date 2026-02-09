@@ -1,5 +1,5 @@
-import { AdminStubView } from "@/views/admin/stub";
+import { AdminFinanceView } from "@/views/admin/finance";
 
 export default function AdminFinancePage() {
-  return <AdminStubView title="Finance" description="Revenue tracking, vendor payouts, transaction reports, and financial analytics will appear here." />;
+  return <AdminFinanceView />;
 }

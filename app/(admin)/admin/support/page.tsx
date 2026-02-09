@@ -1,5 +1,5 @@
-import { AdminStubView } from "@/views/admin/stub";
+import { AdminSupportView } from "@/views/admin/support";
 
 export default function AdminSupportPage() {
-  return <AdminStubView title="Support" description="Support ticket management, escalation workflows, and customer communication tools will appear here." />;
+  return <AdminSupportView />;
 }
